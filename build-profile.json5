@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/liumingxu/.ohos/config/default_HarmongOSNext_Xu_mDhJrF_tNAwVq63x1YtqeKdDM_f5kvIJyBDvIl0zx1E=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A4C9FCF3DD8F007A380892A2E013E12A66A1341D54AAB7CE1429DFC4E0779CB8E933026AEF50B",
+          "profile": "/Users/liumingxu/.ohos/config/default_HarmongOSNext_Xu_mDhJrF_tNAwVq63x1YtqeKdDM_f5kvIJyBDvIl0zx1E=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/liumingxu/.ohos/config/default_HarmongOSNext_Xu_mDhJrF_tNAwVq63x1YtqeKdDM_f5kvIJyBDvIl0zx1E=.p12",
+          "storePassword": "0000001A7BA2AAC043C6C3F00F8E9B5F1E1C26ED04CBB2C1180768BB4FB228C7DFAEE94F6E429DA3666A"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
