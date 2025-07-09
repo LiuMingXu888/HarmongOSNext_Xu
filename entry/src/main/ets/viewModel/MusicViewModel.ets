@@ -320,36 +320,44 @@ musicMainVM.musicTab 中主框架 根据前缀去跳转
 https://git.corp.kuaishou.com/incubation_app/kuaiying-harmony/-/commit/0a5391263d79d1b1124bcdc99a01b159f13db10a
   https://git.corp.kuaishou.com/incubation_app/kuaiying-harmony/-/commit/8bf99831960c34556807251027e973b8acb8b302
 
+点击收藏的方法
+  check1用户是否登录了，如果没有先去登录 本VM判断
+  check2是否已经收藏过了，本VM判断，如果收藏不进行后续操作
+  五个参数，uid，当前点击的音乐对象，是否收藏，成功的CB，失败的CB
 
-
-——————————————————————————————————————————————————————————模板音乐待办区域——————————————————————————————————————————————————————————
-宁哥的拖拽组件-模板当中
-
-Mr链接
-https://git.corp.kuaishou.com/incubation_app/kuaiying-harmony/-/merge_requests/2102/diffs#d226a9cad59d02bfc6ab41d9576d87f2909b883d
-  聚合页
-有版权的音乐 ##7594299 ##6751826、13081520、7594299
-文字硬编码的问题修复，代码的冗余去除和优化，例如，修改了高编的弹窗信息，删除
-
-
-输入的话，弹出键盘和弹出正常
-推荐模板的筛选效果没有过
-所有筛选的缩略的文字的  如2和5-10，选中的最小段数项加...缩略显示，文案高亮显示“2段..."
-
-
-点击去剪辑，先弹出音乐加载弹窗：音乐加载成功进入高级编辑选图页面
-加载中点击取消,取消音乐加载，弹窗消失，返回同款音乐页面
-首次安装快影，未在别处获取应用权限，点击去剪辑，进入选图页面前会先弹出权限弹脔：同意权限后加载音乐进入选图页面，导入素材后能同步音乐进入高级编辑，已在别处获取权限直接进入选图页面
-无网络点击去剪辑，能正常进入选图页面选图后点击选好了，音乐未加载出来：.弹窗:音乐获取失败，请返回重试确定
-
-去剪辑：（暂停开发）
-1-返回页面时，要返回到高编内流页 同时将最外层的Tab切换到剪辑Tab (注意不要用Pop，用pop的pathName)
-2-将该音乐添加到高编的音乐中
-3-将该音乐添加到音乐库的最近使用中
+收藏接口
+  collectionMusic，只暴露出这个方法
+  收藏方法
+  取消收藏方法
+  getCollectionParams 重新规整一下服务器端的要求
 
 
 
 
-// "trace-context": '{"laneId":"PRT.feat_template_music_fix_lzj_0708"}', // 关键头
+首次收藏成功才会显示收藏的弹窗 V
 
-硬编码去除，
+收藏数组回来之后，才会更新UI的状态
+
+如果有袋收藏的音乐，优先袋收藏的
+
+
+
+// this.reportTemplateInfo(res, false) -- 曝光
+
+this.musicSameDataHasMore = false
+if (isFilter) {
+  this.musicSameData.reload(res.data.data!.templates.map(e => new TempItem("TEMPLATE",e)))
+}
+this.onLoadMore()
+
+
+
+this.dialogListener.pageHidden = () => {
+  this.isPlaying = false
+  this.audioPlayerManager?.pauseAudioPlay()
+}
+
+
+
+
+
